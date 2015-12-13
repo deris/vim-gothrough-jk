@@ -10,7 +10,7 @@ So you must be use count specified `j`, `k`, if you want to move like 4 lines up
 Screenshot
 ---
 
-[screenshot](https://raw.githubusercontent.com/deris/s/master/vim-gothrough-jk/vim-gothrough-jk_01_move_sample.gif)
+![screenshot](https://raw.githubusercontent.com/deris/s/master/vim-gothrough-jk/vim-gothrough-jk_01_move_sample.gif)
 
 Usage
 ---
