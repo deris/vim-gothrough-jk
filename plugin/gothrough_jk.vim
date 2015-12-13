@@ -33,7 +33,7 @@ set cpo&vim
 
 let g:gothrough_jk_go_step        = get(g:, 'gothrough_jk_jump_step', 5)
 let g:gothrough_jk_move_count     = get(g:, 'gothrough_jk_jump_start_count', 3)
-let g:gothrough_jk_move_interval  = get(g:, 'gothrough_jk_time_interval', 1000)
+let g:gothrough_jk_move_interval  = get(g:, 'gothrough_jk_time_interval', 150)
 let g:gothrough_jk_reset_interval = get(g:, 'gothrough_jk_reset_time', 4000)
 let g:gothrough_jk_same_direction = get(g:, 'gothrough_jk_same_direction', 1)
 
