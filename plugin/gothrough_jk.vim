@@ -36,6 +36,7 @@ let g:gothrough_jk_move_count     = get(g:, 'gothrough_jk_move_count', 3)
 let g:gothrough_jk_move_interval  = get(g:, 'gothrough_jk_move_interval', 150)
 let g:gothrough_jk_reset_interval = get(g:, 'gothrough_jk_reset_interval', 4000)
 let g:gothrough_jk_same_direction = get(g:, 'gothrough_jk_same_direction', 1)
+let g:gothrough_jk_relativenumber = get(g:, 'gothrough_jk_relativenumber', 0)
 
 noremap <silent><expr> <Plug>(gothrough-jk-j)  gothrough_jk#j()
 noremap <silent><expr> <Plug>(gothrough-jk-k)  gothrough_jk#k()
@@ -59,8 +60,8 @@ end
 
 augroup gothrough-jk
   autocmd!
-  autocmd CursorHold,CursorHoldI   * call gothrough_jk#reset_gothrough_mode()
-  autocmd CursorMoved,CursorMovedI * call gothrough_jk#reset_moved()
+  autocmd CursorHold,CursorHoldI,BufLeave * call gothrough_jk#reset_gothrough_mode()
+  autocmd CursorMoved,CursorMovedI        * call gothrough_jk#reset_moved()
 augroup END
 
 

@@ -82,6 +82,7 @@ let s:last_jk    = ''
 function! s:reset_gothrough_mode() "{{{
   let s:gothrough_mode  = 0
   let s:move_count = 0
+  call s:reset_relativenumber()
 endfunction
 "}}}
 
@@ -116,8 +117,28 @@ function! s:gothrough_jk(jk) "{{{
 
   let s:last_jk = a:jk
 
+  if g:gothrough_jk_relativenumber
+    call s:set_relativenumber()
+  endif
+
   let s:move_count += (s:move_count < g:gothrough_jk_move_count ? 1 : 0)
   return (s:gothrough_mode ? g:gothrough_jk_go_step : '') . a:jk
+endfunction
+"}}}
+
+function! s:set_relativenumber() "{{{
+  if !exists('w:gothrough_jk_relativenumber')
+    let w:gothrough_jk_relativenumber = &relativenumber
+    set relativenumber
+  endif
+endfunction
+"}}}
+
+function! s:reset_relativenumber() "{{{
+  if exists('w:gothrough_jk_relativenumber')
+    let &relativenumber = w:gothrough_jk_relativenumber
+    unlet w:gothrough_jk_relativenumber
+  endif
 endfunction
 "}}}
 
