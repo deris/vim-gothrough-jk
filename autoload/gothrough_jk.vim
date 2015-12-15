@@ -73,26 +73,36 @@ endfunction
 
 " Private {{{1
 
-let s:moved_jk   = 0
-let s:gothrough_mode  = 0
-let s:move_count = 0
-let s:prev_time  = reltime()
-let s:last_jk    = ''
+let s:moved_jk       = 0
+let s:gothrough_mode = 0
+let s:move_count     = 0
+let s:prev_time      = reltime()
+let s:last_jk        = ''
+let s:prev_count     = 0
 
 function! s:reset_gothrough_mode() "{{{
-  let s:gothrough_mode  = 0
-  let s:move_count = 0
+  let s:gothrough_mode = 0
+  let s:move_count     = 0
+  let s:prev_count     = 0
   call s:reset_relativenumber()
 endfunction
 "}}}
 
 function! s:gothrough_jk(jk) "{{{
+  let s:moved_jk = 1
+
   if v:count > 0
-    call s:reset_gothrough_mode()
+    let s:prev_count = v:count
+    let s:gothrough_mode = 0
+    let s:move_count     = 0
+    call s:reset_relativenumber()
+    if g:gothrough_jk_repeat_count_jk
+      let s:gothrough_mode = 1
+      let s:last_jk = a:jk
+      let s:prev_time = reltime()
+    endif
     return a:jk
   endif
-
-  let s:moved_jk = 1
 
   let now_time    = reltime()
   let diff_time   = reltime(s:prev_time, now_time)
@@ -116,6 +126,10 @@ function! s:gothrough_jk(jk) "{{{
   endif
 
   let s:last_jk = a:jk
+
+  if g:gothrough_jk_repeat_count_jk && s:prev_count > 0
+    return s:prev_count . a:jk
+  endif
 
   if g:gothrough_jk_relativenumber
     call s:set_relativenumber()
