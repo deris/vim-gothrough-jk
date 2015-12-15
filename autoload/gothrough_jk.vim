@@ -87,7 +87,7 @@ endfunction
 "}}}
 
 function! s:gothrough_jk(jk) "{{{
-  if v:count1 > 1
+  if v:count > 0
     call s:reset_gothrough_mode()
     return a:jk
   endif
